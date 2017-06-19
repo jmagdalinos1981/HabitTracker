@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 insertDummyHabits();
-                displayDatabaseInfo();
+                displayDatabaseInfo(readHabits());
 
                 Toast.makeText(MainActivity.this, "Dummy habit data added", Toast.LENGTH_SHORT)
                         .show();
@@ -41,31 +41,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        displayDatabaseInfo();
+        displayDatabaseInfo(readHabits());
     }
 
-    private void displayDatabaseInfo() {
-        // Create and/or open a database to write to it
-        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+    private void displayDatabaseInfo(Cursor cursor) {
 
-        // Define a projection that specifies which columns from the database
-        // will be used after this query.
-        String[] projection = {
-                HabitEntry._ID,
-                HabitEntry.COLUMN_NAME,
-                HabitEntry.COLUMN_DATE,
-                HabitEntry.COLUMN_DURATION,
-                HabitEntry.COLUMN_LOCATION};
-
-        // Perform a query on the habits table
-        Cursor cursor = db.query(
-                HabitEntry.TABLE_NAME,      // The name of the table
-                projection,                 // The Columns to return
-                null,                       // The columns for the WHERE clause
-                null,                       // The values for the WHERE clause
-                null,                       // Don't group the rows
-                null,                       // Don't filter by row groups
-                null);                      // The sort order
 
         // Find the TextView where the table information will be shown
         TextView headerTextView = (TextView) findViewById(R.id.text_view_header);
@@ -140,5 +120,31 @@ public class MainActivity extends AppCompatActivity {
             // Insert a new row for the habit in the database, returning the ID of that new row.
             long newRowId = db.insert(HabitEntry.TABLE_NAME, null, values);
         }
+    }
+
+    private Cursor readHabits() {
+        // Create and/or open a database to write to it
+        SQLiteDatabase db = mDbHelper.getReadableDatabase();
+
+        // Define a projection that specifies which columns from the database
+        // will be used after this query.
+        String[] projection = {
+                HabitEntry._ID,
+                HabitEntry.COLUMN_NAME,
+                HabitEntry.COLUMN_DATE,
+                HabitEntry.COLUMN_DURATION,
+                HabitEntry.COLUMN_LOCATION};
+
+        // Perform a query on the habits table
+        Cursor cursor = db.query(
+                HabitEntry.TABLE_NAME,      // The name of the table
+                projection,                 // The Columns to return
+                null,                       // The columns for the WHERE clause
+                null,                       // The values for the WHERE clause
+                null,                       // Don't group the rows
+                null,                       // Don't filter by row groups
+                null);                      // The sort order
+
+        return cursor;
     }
 }

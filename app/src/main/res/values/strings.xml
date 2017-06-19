@@ -8,33 +8,5 @@
     <string name="datePlaceholder">date</string>
     <string name="durationPlaceholder">duration</string>
     <string name="locationPlaceholder">location</string>
-    
-    <!-- String Arrays for dummy entries -->
-    <string-array name="habitNames">
-        <item>Running</item>
-        <item>Painting</item>
-        <item>Reading</item>
-        <item>Cleaning</item>
-        <item>Cooking</item>
-        <item>BBQ</item>
-    </string-array>
-
-    <string-array name="habitDates">
-        <item>15/06/2017</item>
-        <item>13/06/2017</item>
-        <item>12/06/2017</item>
-        <item>10/06/2017</item>
-        <item>11/06/2017</item>
-        <item>06/06/2017</item>
-    </string-array>
-
-    <string-array name="habitLocations">
-        <item>Park</item>
-        <item>Townhall</item>
-        <item>Home</item>
-        <item>Home</item>
-        <item>Home</item>
-        <item>Park</item>
-    </string-array>
 
 </resources>
